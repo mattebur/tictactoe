@@ -1,16 +1,28 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import error as err
+import functions as fun
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+board = {'TL': ' ', 'TM': ' ', 'TR': ' ',
+         'ML': ' ', 'MM': ' ', 'MR': ' ',
+         'BL': ' ', 'BM': ' ', 'BR': ' '}
+
+availableMoves = ['TL', 'TM', 'TR','ML', 'MM', 'MR','BL','BM','BR']
+turn = 'X'
+fun.printing_board(board)
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+for i in range(9):
+    try:
+            move = input('Player ' + turn + ' Enter your move: ')
+            if move not in availableMoves:
+                raise err.InvalidUserInput
+            board[move] = turn
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+            if turn == 'X':
+                turn = 'O'
+            else:
+                turn = 'X'
+            fun.printing_board(board)
+
+    except err.InvalidUserInput:
+        print('Thats not position')
